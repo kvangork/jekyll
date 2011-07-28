@@ -26,7 +26,7 @@ module Jekyll
     def read_yaml(base, name)
       self.content = File.read(File.join(base, name))
 
-      if self.content =~ /^(---\s*\n.*?\n?)^(---\s*$\n?)/m
+      if self.content =~ /^((---)*\s*\n?.*?\n?)^((---)*\s*$\n?)/m
         self.content = $POSTMATCH
 
         begin

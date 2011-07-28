@@ -134,8 +134,8 @@ module Jekyll
           next if self.dest.sub(/\/$/, '') == f_abs
           read_directories(f_rel)
         elsif !File.symlink?(f_abs)
-          first3 = File.open(f_abs) { |fd| fd.read(3) }
-          if first3 == "---"
+          firstline = File.open(f_abs) { |fd| fd.readline }
+          if firstline.start_with? "---" or firstline =~ /^(\w|-)+:\s+.+/
             # file appears to have a YAML header so process it as a page
             pages << Page.new(self, self.source, dir, f)
           else
