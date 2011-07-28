@@ -6,6 +6,7 @@ module Jekyll
     attr_accessor :config, :layouts, :posts, :pages, :static_files,
                   :categories, :exclude, :source, :dest, :lsi, :pygments,
                   :permalink_style, :tags, :time, :future, :safe, :plugins, :limit_posts
+                  :post_layout
 
     attr_accessor :converters, :generators
 
@@ -25,6 +26,7 @@ module Jekyll
       self.exclude         = config['exclude'] || []
       self.future          = config['future']
       self.limit_posts     = config['limit_posts'] || nil
+      self.post_layout     = config['post_layout']
 
       self.reset
       self.setup

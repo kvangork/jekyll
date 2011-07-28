@@ -56,6 +56,10 @@ module Jekyll
       if self.categories.empty?
         self.categories = self.data.pluralized_array('category', 'categories')
       end
+      
+      if @site.post_layout && self.data['layout'].blank?
+        self.data['layout'] = @site.post_layout
+      end
     end
 
     # Spaceship is based on Post#date, slug
