@@ -90,6 +90,10 @@ opts = OptionParser.new do |opts|
   opts.on("--kramdown", "Use kramdown gem for Markdown") do
     options['markdown'] = 'kramdown'
   end
+  
+  opts.on("--mulitmarkdown", "Use rpeg-multimarkdown gem for Markdown") do
+    options['markdown'] = 'multimarkdown'
+  end
 
   opts.on("--time [TIME]", "Time to generate the site for") do |time|
     options['time'] = Time.parse(time)
