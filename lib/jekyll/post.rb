@@ -57,7 +57,7 @@ module Jekyll
         self.categories = self.data.pluralized_array('category', 'categories')
       end
       
-      if @site.post_layout && self.data['layout'].blank?
+      if @site.post_layout && !self.data.has_key?('layout')
         self.data['layout'] = @site.post_layout
       end
     end
@@ -189,7 +189,7 @@ module Jekyll
         "site" => { "related_posts" => related_posts(site_payload["site"]["posts"]) },
         "page" => self.to_liquid
       }.deep_merge(site_payload)
-
+      
       do_layout(payload, layouts)
     end
     

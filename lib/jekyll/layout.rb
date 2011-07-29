@@ -39,6 +39,12 @@ module Jekyll
     def process(name)
       self.ext = File.extname(name)
     end
+    
+    
+    def yaml_regex
+      /^(---\s*\n.*?\n?)^(---\s*$\n?)/m
+    end
+    
   end
 
 end

@@ -16,6 +16,10 @@ module Jekyll
     def to_s
       self.content || ''
     end
+    
+    def yaml_regex
+      /^((---)*\s*\n?.*?\n?)^((---)*\s*$\n?)/m
+    end
 
     # Read the YAML frontmatter.
     #
@@ -26,11 +30,18 @@ module Jekyll
     def read_yaml(base, name)
       self.content = File.read(File.join(base, name))
 
-      if self.content =~ /^((---)*\s*\n?.*?\n?)^((---)*\s*$\n?)/m
+      if self.content =~ yaml_regex
         self.content = $POSTMATCH
 
         begin
           self.data = YAML.load($1)
+          if(self.data.is_a? Hash ) 
+            self.data.each_key { |key|
+              self.data[key.downcase] = self.data.delete(key)
+            }
+          else
+            self.data = {} #no YAML? Don't bother setting data to a string.
+          end
         rescue => e
           puts "YAML Exception reading #{name}: #{e.message}"
         end

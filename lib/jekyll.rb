@@ -97,6 +97,9 @@ module Jekyll
         'coderay_bold_every'        => 10,
         'coderay_css'               => 'style'
       }
+    },
+    'multimarkdown' => {
+      'extensions'  => []
     }
   }
 
